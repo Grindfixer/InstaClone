@@ -1,23 +1,41 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity
+} from "react-native";
 import { tsConstructorType } from "@babel/types";
 import { dim } from "ansi-colors";
+import config from "./config";
 
 class InstaClone extends Component {
   constructor() {
     super();
     this.state = {
-      screenWidth: 0
+      liked: false,
+      screenWidth: Dimensions.get("window").width
     };
   }
 
-  componentDidMount() {
+  likeToggled() {
     this.setState({
-      screenWidth: Dimensions.get("window").width
-    })
+      liked: !this.state.liked
+    });
   }
 
   render() {
+    const imageHeight = Math.floor(this.state.screenWidth * 1.1);
+    const imageUri =
+      "https://lh3.googleusercontent.com/NetFCMbu_X6Db6kedM_JQKfEhnpaL3qUdGNh5etql1ZNqgPkFqGa1RpgM-XHf_W2Qnw6bH-ArCqEHKaiSUXZ88pXJA" +
+      "=s" +
+      imageHeight +
+      "-c";
+
+    const heartIconColor = this.state.liked ? "rgb(252,61,57)" : null;
+
     return (
       <View style={{ flex: 1, width: 100 + "%", height: 100 + "%" }}>
         <View style={styles.tempNav}>
@@ -40,14 +58,40 @@ class InstaClone extends Component {
           </View>
           <View />
         </View>
-        <Image
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{ width: this.state.screenWidth, height: 100 }}
-          source={{
-            uri:
-              "https://lh3.googleusercontent.com/NetFCMbu_X6Db6kedM_JQKfEhnpaL3qUdGNh5etql1ZNqgPkFqGa1RpgM-XHf_W2Qnw6bH-ArCqEHKaiSUXZ88pXJA"
+        <TouchableOpacity
+          onPress={() => {
+            this.likeToggled();
           }}
-        />
+        >
+          <Image
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{ width: this.state.screenWidth, height: 400 }}
+            source={{
+              uri: imageUri
+            }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.iconBar}>
+          <Image
+            style={[
+              styles.icon,
+              { height: 40, width: 40, tintColor: heartIconColor }
+            ]}
+            source={config.images.heartIcon}
+          />
+
+          <Image
+            style={[styles.icon, { height: 36, width: 36 }]}
+            source={config.images.bubbleIcon}
+          />
+
+          <Image
+            resizeMode="stretch"
+            style={[styles.icon, { height: 50, width: 40 }]}
+            source={config.images.arrowIcon}
+          />
+        </View>
       </View>
     );
   }
@@ -65,7 +109,7 @@ const styles = StyleSheet.create({
   },
   userBar: {
     width: 100 + "%",
-    height: 50,
+    height: config.styleConstants.rowHeight,
     backgroundColor: "rgb(255,255,255)",
     flexDirection: "row",
     paddingHorizontal: 10,
@@ -76,6 +120,18 @@ const styles = StyleSheet.create({
     height: 40,
     width: 40,
     borderRadius: 20
+  },
+  iconBar: {
+    height: config.styleConstants.rowHeight,
+    width: 100 + "%",
+    borderColor: "rgb(180,180,180)",
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  icon: {
+    paddingLeft: 5
   }
 });
 
