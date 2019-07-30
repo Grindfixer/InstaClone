@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import {
   View,
@@ -35,7 +36,7 @@ class Post extends Component {
     const heartIconColor = this.state.liked ? "rgb(252,61,57)" : null;
 
     return (
-      <View style={{flex: 1, flexDirection: "column" }}>
+      <View style={{ flex: 1, flexDirection: "column" }}>
         <View style={styles.userBar}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Image
@@ -54,12 +55,14 @@ class Post extends Component {
         </View>
 
         <TouchableOpacity
+        activeOpacity={0.75}
           onPress={() => {
             this.likeToggled();
+          
           }}
         >
           <Image
-            // eslint-disable-next-line react-native/no-inline-styles
+
             style={{ width: this.state.screenWidth, height: 400 }}
             source={{
               uri: imageUri
@@ -68,14 +71,15 @@ class Post extends Component {
         </TouchableOpacity>
 
         <View style={styles.iconBar}>
-          <Image
+
+
+        <Image
             style={[
               styles.icon,
               { height: 40, width: 40, tintColor: heartIconColor }
             ]}
             source={config.images.heartIcon}
           />
-
           <Image
             style={[styles.icon, { height: 36, width: 36 }]}
             source={config.images.bubbleIcon}
@@ -87,11 +91,20 @@ class Post extends Component {
             source={config.images.arrowIcon}
           />
         </View>
+        <View>
+          <View style={styles.iconBar}>
+            <Image
+              style={[
+                styles.icon,
+                { height: 40, width: 40, tintColor: heartIconColor }
+              ]}
+              source={config.images.heartIcon}
+            />
 
-        <View style={styles.iconBar}>
-          <Image style={[styles.icon, { height: 30, width: 30 }]} 
-          source={config.images.heartIcon}/>
-          <Text>120 Likes</Text>
+            <Text>123 Likes</Text>
+            
+
+          </View>
         </View>
       </View>
     );
@@ -100,7 +113,6 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
   userBar: {
-    width: 100 + "%",
     height: config.styleConstants.rowHeight,
     backgroundColor: "rgb(255,255,255)",
     flexDirection: "row",
@@ -114,8 +126,8 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   iconBar: {
-    height: config.styleConstants.rowHeight,
     width: 100 + "%",
+    height: config.styleConstants.rowHeight,
     borderColor: "rgb(180,180,180)",
     borderTopWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -123,9 +135,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   icon: {
-    paddingLeft: 5
-  },
-
+    marginLeft: 12
+  }
 });
 
 export default Post;
