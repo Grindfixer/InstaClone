@@ -7,8 +7,6 @@ import {
   Dimensions,
   TouchableOpacity
 } from "react-native";
-import { tsConstructorType } from "@babel/types";
-import { dim } from "ansi-colors";
 import config from "../../config";
 
 class Post extends Component {
@@ -37,31 +35,29 @@ class Post extends Component {
     const heartIconColor = this.state.liked ? "rgb(252,61,57)" : null;
 
     return (
-      <View style={styles.userBar}>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            style={styles.userPic}
-            source={{
-              uri:
-                "https://lh3.googleusercontent.com/rCBMuE30hg-Z1lil_8eSDgaAN5PXW-ORxAeNYKD7l3FK6kkeFeM7qkHN0380Uc0mXPt52Xtbr0VYDHP4a1F8AH3MTQ"
-            }}
-          />
+      <View style={{flex: 1, flexDirection: "column" }}>
+        <View style={styles.userBar}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Image
+              style={styles.userPic}
+              source={{
+                uri:
+                  "https://lh3.googleusercontent.com/rCBMuE30hg-Z1lil_8eSDgaAN5PXW-ORxAeNYKD7l3FK6kkeFeM7qkHN0380Uc0mXPt52Xtbr0VYDHP4a1F8AH3MTQ"
+              }}
+            />
+            <Text style={{ marginLeft: 10 }}>Tony Mahroneystein</Text>
+          </View>
 
-          <Text style={{ marginLeft: 10 }}>Tony Mahroneystein</Text>
+          <View style={{ marginLeft: "auto" }}>
+            <Text style={{ fontSize: 30 }}>...</Text>
+          </View>
         </View>
 
-        <View style={{ marginLeft: "auto" }}>
-          <Text style={{ fontSize: 30 }}>...</Text>
-        </View>
-
-        <View />
-
-        <TouchableOpacity>
-          onPress=
-          {() => {
+        <TouchableOpacity
+          onPress={() => {
             this.likeToggled();
           }}
-          >
+        >
           <Image
             // eslint-disable-next-line react-native/no-inline-styles
             style={{ width: this.state.screenWidth, height: 400 }}
@@ -91,6 +87,12 @@ class Post extends Component {
             source={config.images.arrowIcon}
           />
         </View>
+
+        <View style={styles.iconBar}>
+          <Image style={[styles.icon, { height: 30, width: 30 }]} 
+          source={config.images.heartIcon}/>
+          <Text>120 Likes</Text>
+        </View>
       </View>
     );
   }
@@ -116,13 +118,14 @@ const styles = StyleSheet.create({
     width: 100 + "%",
     borderColor: "rgb(180,180,180)",
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
     flexDirection: "row",
     alignItems: "center"
   },
   icon: {
     paddingLeft: 5
-  }
+  },
+
 });
 
 export default Post;
