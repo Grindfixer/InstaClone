@@ -20,7 +20,7 @@ class InstaClone extends Component {
         <View style={styles.tempNav}>
           <Text>InstaClone</Text>
           </View>
-         <PostFeed />
+          <PostFeed />
       </View>
     ); //end return
   } //end render
@@ -29,7 +29,7 @@ class InstaClone extends Component {
 const styles = StyleSheet.create({
   tempNav: {
     width: 100 + '%',
-    height:100,
+    height:56,
     backgroundColor: 'rgb(238,238,238)',
     borderBottomColor: 'rgb(180,180,180)',
     borderBottomWidth: StyleSheet.hairlineWidth,
